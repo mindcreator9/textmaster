@@ -21,3 +21,4 @@ https://www.textmaster.netlify.app/
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/mindcreator9/textmaster.git
+![image](https://github.com/user-attachments/assets/bffa56e1-946f-435d-9510-1b286a49243e)
