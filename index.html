@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEXTMASTER | Markdown Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&family=Montserrat:wght@300;400;500;600&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>TEXT<span>MASTER</span></h1>
+            <span class="tagline">Markdown Editor</span>
+        </div>
+        <nav>
+            <button id="templateBtn" class="nav-btn"><i class="fas fa-layer-group"></i> Templates</button>
+            <button id="settingsBtn" class="nav-btn"><i class="fas fa-cog"></i> Settings</button>
+            <button id="betaBtn" class="nav-btn beta"><i class="fab fa-discord"></i> Beta</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="editor-container">
+            <div class="toolbar">
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button class="tool-btn" data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button class="tool-btn" data-command="heading" data-param="1" title="Heading 1"><i class="fas fa-heading"></i> 1</button>
+                    <button class="tool-btn" data-command="heading" data-param="2" title="Heading 2"><i class="fas fa-heading"></i> 2</button>
+                    <button class="tool-btn" data-command="heading" data-param="3" title="Heading 3"><i class="fas fa-heading"></i> 3</button>
+                </div>
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="link" title="Insert Link"><i class="fas fa-link"></i></button>
+                    <button class="tool-btn" data-command="image" title="Insert Image"><i class="fas fa-image"></i></button>
+                    <button class="tool-btn" data-command="list-ul" title="Unordered List"><i class="fas fa-list-ul"></i></button>
+                    <button class="tool-btn" data-command="list-ol" title="Ordered List"><i class="fas fa-list-ol"></i></button>
+                    <button class="tool-btn" data-command="quote" title="Blockquote"><i class="fas fa-quote-right"></i></button>
+                    <button class="tool-btn" data-command="code" title="Code Block"><i class="fas fa-code"></i></button>
+                </div>
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="table" title="Insert Table"><i class="fas fa-table"></i></button>
+                    <button class="tool-btn" data-command="horizontal-rule" title="Horizontal Rule"><i class="fas fa-minus"></i></button>
+                    <button class="tool-btn" data-command="clear" title="Clear Content"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+            <div class="editor-wrapper">
+                <textarea id="editor" placeholder="Start typing your markdown here..."></textarea>
+            </div>
+        </div>
+        <div class="preview-container">
+            <div class="preview-header">
+                <h3>Preview</h3>
+                <div class="preview-actions">
+                    <button id="copyBtn" class="action-btn"><i class="fas fa-copy"></i> Copy</button>
+                    <button id="downloadBtn" class="action-btn"><i class="fas fa-download"></i> Download</button>
+                </div>
+            </div>
+            <div id="preview" class="preview-content"></div>
+        </div>
+    </main>
+
+    <!-- Template Modal -->
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Templates</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="template-grid">
+                    <div class="template-card" data-template="readme">
+                        <h3>README</h3>
+                        <p>Standard GitHub README structure</p>
+                    </div>
+                    <div class="template-card" data-template="meeting">
+                        <h3>Meeting Notes</h3>
+                        <p>Structured template for meeting notes</p>
+                    </div>
+                    <div class="template-card" data-template="blog">
+                        <h3>Blog Post</h3>
+                        <p>Professional blog article layout</p>
+                    </div>
+                    <div class="template-card" data-template="documentation">
+                        <h3>Documentation</h3>
+                        <p>Technical documentation structure</p>
+                    </div>
+                    <div class="template-card" data-template="project">
+                        <h3>Project Plan</h3>
+                        <p>Complete project planning template</p>
+                    </div>
+                    <div class="template-card" data-template="elegant">
+                        <h3>Elegant Profile</h3>
+                        <p>Styled personal profile or bio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="settings-group">
+                    <h3>Editor Settings</h3>
+                    <div class="setting-item">
+                        <label for="fontFamily">Font Family:</label>
+                        <select id="fontFamily">
+                            <option value="Roboto, sans-serif">Roboto</option>
+                            <option value="Poppins, sans-serif">Poppins</option>
+                            <option value="'Playfair Display', serif">Playfair Display</option>
+                            <option value="Montserrat, sans-serif">Montserrat</option>
+                            <option value="'Open Sans', sans-serif">Open Sans</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="fontSize">Font Size:</label>
+                        <input type="range" id="fontSize" min="12" max="24" value="16">
+                        <span id="fontSizeValue">16px</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="theme">Editor Theme:</label>
+                        <select id="theme">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="sepia">Sepia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <h3>Preview Settings</h3>
+                    <div class="setting-item">
+                        <label for="previewFontFamily">Preview Font:</label>
+                        <select id="previewFontFamily">
+                            <option value="Roboto, sans-serif">Roboto</option>
+                            <option value="Poppins, sans-serif">Poppins</option>
+                            <option value="'Playfair Display', serif">Playfair Display</option>
+                            <option value="Montserrat, sans-serif">Montserrat</option>
+                            <option value="'Open Sans', sans-serif">Open Sans</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="previewTheme">Preview Theme:</label>
+                        <select id="previewTheme">
+                            <option value="default">Default</option>
+                            <option value="github">GitHub</option>
+                            <option value="elegant">Elegant</option>
+                            <option value="minimal">Minimal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettings" class="primary-btn">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beta Modal (Discord Webhook) -->
+    <div id="betaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Discord Webhook (Beta)</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="beta-warning">
+                    <i class="fas fa-flask"></i>
+                    <p>This feature is in beta. Send your markdown content directly to Discord via webhook.</p>
+                </div>
+                <div class="form-group">
+                    <label for="webhookUrl">Discord Webhook URL:</label>
+                    <input type="text" id="webhookUrl" placeholder="https://discord.com/api/webhooks/...">
+                </div>
+                <div class="form-group">
+                    <label for="username">Display Name (optional):</label>
+                    <input type="text" id="username" placeholder="TEXTMASTER Bot">
+                </div>
+                <div class="form-group">
+                    <label for="messageTitle">Message Title (optional):</label>
+                    <input type="text" id="messageTitle" placeholder="New markdown message">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="sendToDiscord" class="primary-btn">Send to Discord</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="credits">
+            Created by mindcreator9 / The epic cake
+        </div>
+    </footer>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
