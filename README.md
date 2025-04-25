@@ -14,7 +14,7 @@ TEXTMASTER is an elegant, feature-rich Markdown editor designed to help users cr
 
 ## Demo
 
-https://www.textmaster.netlify.app/
+https://www.tmgen.netlify.app/
 
 ## Installation
 
